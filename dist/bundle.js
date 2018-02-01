@@ -99323,44 +99323,19 @@ class Duck {
             request: request,
             response: response
         });
-        const USERNAME_ARGUMENT = 'username';
-        const START_CHAT = 'intent.chat';
-        const LOGIN_INTENT = 'input.login';
+        const MORNING_INTENT = 'input.morning';
 
-        let username = "name";
 
-        function chatIntent(app) {
-            const permission = app.SupportedPermissions.NAME;
-            app.askForPermission('can I get your username?', permission);
-
-            // app.setContext(USERNAME_ARGUMENT);
-
-            // const user = app.getUser();
-
-            // username = user.userName;
-            // app.ask(`Welcome to Duck chat! Login as ${username}?.`, ['Then you can list your conversations', 'Open a conversation', 'We can stop here. See you soon.']);
+        function morningIntent(app) {
+            app.tell(`good morning to you too!`);
         }
 
-        function loginIntent(app) {
-            if (app.isPermissionGranted()) {
-                username = app.getUserName().displayName;
-                app.ask('log in as ' + displayName + '?');
-            } else {
-                // Response shows that user did not grant permission
-                app.tell('Sorry, I could not figure out who you are.');
-            }
-
-
-            console.log(username);
-        }
 
         const actionMap = new Map();
-        actionMap.set(START_CHAT, chatIntent);
-        actionMap.set(LOGIN_INTENT, loginIntent);
+        actionMap.set(MORNING_INTENT, morningIntent);
         app.handleRequest(actionMap);
 
     }
-
 }
 
 module.exports = Duck

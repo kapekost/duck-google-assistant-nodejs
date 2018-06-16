@@ -1,16 +1,21 @@
 const express = require('express')
-const app = express();
 const bodyParser = require("body-parser");
 const Duck = require('./duck');
 
-app.use(bodyParser.json());
+const {
+    dialogflow,
+    Image,
+} = require('actions-on-google');
+const app = dialogflow();
 
-app.post('/', (req, res) => {
-    const duck = new Duck(req, res);
+app.post('/stitch_event', (req, res) => {
+    duck.process(req, res);
     // res.send(JSON.stringify({
     //     "speech": res,
     //     "displayText": res
     // }))
 });
 
-app.listen(8000, () => console.log('Duck service!'))
+new Duck(app);
+
+express().use(bodyParser.json(), app).listen(8000, () => console.log('Duck service!'))

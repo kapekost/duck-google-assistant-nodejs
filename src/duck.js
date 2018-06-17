@@ -4,10 +4,10 @@ const Nexmo = require('nexmo');
 const ConversationClient = require('nexmo-stitch');
 
 class Duck {
-    constructor(app) {
-        const APP_ID = "5bedff52-1f8a-4ed6-9db9-47c63aee9978";
-        const API_KEY = "99b1dc42";
-        const API_SECRET = "zWTd5B7s";
+    constructor(request, response) {
+        const APP_ID = "YOUR APP ID";
+        const API_KEY = "YOUT API KEY";
+        const API_SECRET = "YOUR API SECRET";
         const PRIVATE_KEY_PATH = "private.key";
 
         const nexmo = new Nexmo({

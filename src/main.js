@@ -10,10 +10,6 @@ const app = dialogflow();
 
 app.post('/stitch_event', (req, res) => {
     duck.process(req, res);
-    // res.send(JSON.stringify({
-    //     "speech": res,
-    //     "displayText": res
-    // }))
 });
 
 new Duck(app);

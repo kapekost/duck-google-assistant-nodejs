@@ -1,14 +1,14 @@
 
 const Nexmo = require('nexmo');
-
+const config = require('config');
 const ConversationClient = require('nexmo-stitch');
 
 class Duck {
-    constructor(request, response) {
-        const APP_ID = "YOUR APP ID";
-        const API_KEY = "YOUT API KEY";
-        const API_SECRET = "YOUR API SECRET";
-        const PRIVATE_KEY_PATH = "private.key";
+    constructor(app) {
+        const APP_ID = config.get('Nexmo.APP_ID')
+        const API_KEY = config.get('Nexmo.API_KEY');
+        const API_SECRET = config.get('Nexmo.API_SECRET');
+        const PRIVATE_KEY_PATH = config.get('Nexmo.PRIVATE_KEY_PATH');
 
         const nexmo = new Nexmo({
             apiKey: API_KEY,
@@ -25,12 +25,10 @@ class Duck {
         });
         console.log(jwt);
 
-        const MORNING_INTENT = 'input.morning';
-        const LOGIN_INTENT = 'input.login'
 
-        const current_conversation = null;
 
-        function morningIntent(app) {
+
+        app.intent('Default Welcome Intent', conv => {
             nexmo.users.create(
                 {
                     name: "kostas",
@@ -38,9 +36,9 @@ class Duck {
                     diplay_url: "https://randomuser.me/api/portraits/men/81.jpg"
                 },
                 () => {
-                    app.ask(`good morning to you too!, new user is ready`);
+                    conv.ask(`good morning Kostas!, new user is ready`);
                 });
-        }
+        });
 
         app.intent('login', conv => {
             // conv.ask(`Sure, let's login!`);
@@ -54,7 +52,7 @@ class Duck {
                         this.conversation = conversation;
                     });
             }).catch(error => console.log(error));
-        })
+        });
     }
 }
 

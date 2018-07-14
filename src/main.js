@@ -2,15 +2,12 @@ const express = require('express')
 const bodyParser = require("body-parser");
 const Duck = require('./duck');
 
-const {
-    dialogflow,
-    Image,
-} = require('actions-on-google');
+const { dialogflow } = require('actions-on-google');
 const app = dialogflow();
 
-app.post('/stitch_event', (req, res) => {
-    duck.process(req, res);
-});
+// app.post('/stitch_event', (req, res) => {
+//     duck.process(req, res);
+// });
 
 new Duck(app);
 

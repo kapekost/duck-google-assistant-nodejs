@@ -19,9 +19,10 @@ class Duck {
 
         const conversationClient = new ConversationClient();
         const jwt = nexmo.generateJwt({
-            application_id: APP_ID, sub: "kostas",
+            application_id: APP_ID,
+            sub: "kostas",
             exp: (new Date().getTime() + 60 * 60 * 1000) / 1000,
-            acl: { "paths": { "/v1/users/**": {}, "/v1/conversations/**": {}, "/v1/sessions/**": {}, "/v1/devices/**": {}, "/v1/image/**": {}, "/v3/media/**": {}, "/v1/applications/**": {}, "/v1/push/**": {} } }
+            acl: { "paths": { "/v1/users/**": {}, "/v1/conversations/**": {}, "/v1/sessions/**": {}, "/v1/devices/**": {}, "/v1/image/**": {}, "/v3/media/**": {}, "/v1/applications/**": {}, "/v1/push/**": {}, "/v1/knocking/**": {} } }
         });
         console.log(jwt);
 
@@ -49,9 +50,15 @@ class Duck {
                     .then((conversation) => {
                         console.log('created conversation' + conversation.display_name);
                         conv.ask(`Welcome to the conversation ${conversation.display_name}`);
+
                         this.conversation = conversation;
                     });
             }).catch(error => console.log(error));
+        });
+        app.intent('stitch welcome', conv => {
+            return this.conversation.sendText('hi').then(() => {
+                conv.ask('done');
+            });
         });
     }
 }

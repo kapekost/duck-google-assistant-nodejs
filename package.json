@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run build && node dist/bundle.js",
+    "start": "export NODE_ENV=production && npm run build && node dist/bundle.js",
     "build": "browserify ./src/main.js -d -o ./dist/bundle.js --node"
   },
   "keywords": [

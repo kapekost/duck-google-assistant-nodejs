@@ -26,9 +26,6 @@ class Duck {
         });
         console.log(jwt);
 
-
-
-
         app.intent('Default Welcome Intent', conv => {
             nexmo.users.create(
                 {
@@ -42,23 +39,26 @@ class Duck {
         });
 
         app.intent('login', conv => {
-            // conv.ask(`Sure, let's login!`);
-            return conversationClient.login(jwt).then((stitchApp) => {
-                console.log('logged in');
-                conv.ask(`logged in as Kostas!`);
-                return stitchApp.newConversationAndJoin({ display_name: "Stitch Duck" })
-                    .then((conversation) => {
-                        console.log('created conversation' + conversation.display_name);
-                        conv.ask(`Welcome to the conversation ${conversation.display_name}`);
+            return conversationClient.login(jwt)
+                .then((stitchApp) => {
+                    console.log('logged in');
+                    conv.ask(`logged in as Kostas!`);
+                    return stitchApp.newConversationAndJoin({ display_name: "Stitch Duck" })
+                        .then((conversation) => {
+                            console.log('created conversation' + conversation.display_name);
+                            conv.ask(`Welcome to the conversation ${conversation.display_name}`);
 
-                        this.conversation = conversation;
-                    });
-            }).catch(error => console.log(error));
+                            this.conversation = conversation;
+                        });
+                }).catch(error => console.log(error));
         });
         app.intent('stitch welcome', conv => {
-            return this.conversation.sendText('hi').then(() => {
-                conv.ask('done');
-            });
+            return this.conversation.sendText('hi')
+                .then(() => {
+                    conv.ask('message sent');
+                }).catch(() => {
+                    conv.ask('something went wrong, please try again');
+                });
         });
     }
 }

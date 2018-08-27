@@ -2,11 +2,11 @@
   "name": "miss-duck",
   "version": "1.0.0",
   "description": "Client service for google assistant",
-  "main": "dist/bundle.js",
+  "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node dist/bundle.js",
-    "build": "browserify ./src/main.js -o ./dist/bundle.js --node"
+    "start": "export NODE_ENV=production && npm run build && node dist/bundle.js",
+    "build": "browserify ./src/main.js -d -o ./dist/bundle.js --node"
   },
   "keywords": [
     "conversation",
@@ -16,9 +16,19 @@
   "author": "Kostas Kapetanakis",
   "license": "ISC",
   "dependencies": {
-    "actions-on-google": "^1.11.0",
+    "actions-on-google": "^2.2.0",
     "body-parser": "^1.18.3",
-    "dialogflow": "^0.1.0",
-    "express": "^4.16.3"
+    "browserify": "^16.2.2",
+    "bufferutil": "^4.0.0",
+    "config": "^1.30.0",
+    "dialogflow": "^0.5.0",
+    "eslint": "^4.19.1",
+    "express": "^4.16.3",
+    "nexmo": "^2.3.1-beta-1",
+    "nexmo-stitch": "^1.0.14",
+    "utf-8-validate": "^5.0.1"
+  },
+  "devDependencies": {
+    "eslint-config-google": "^0.9.1"
   }
 }

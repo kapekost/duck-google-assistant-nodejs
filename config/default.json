@@ -1,0 +1,9 @@
+{
+    // Nexmo account config
+    "Nexmo": {
+        "APP_ID": "YOUR APP ID",
+        "API_KEY": "YOUT API KEY",
+        "API_SECRET": "YOUR API SECRET",
+        "PRIVATE_KEY_PATH": "private.key"
+    }
+}

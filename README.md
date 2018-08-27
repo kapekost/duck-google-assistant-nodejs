@@ -2,13 +2,19 @@
 
 nodeJS google assistant webhook
 
-## install libs
+## Install libs
 
 ```shell
 npm i
 ```
 
-## start the webhook
+## Config
+
+Using the `config` module, we're parsing the `./config/default.json` file
+use `NODE_ENV` to point to the version of .json file you need
+`export NODE_ENV=production`
+
+## Start the webhook
 
 ```shell
 npm start
